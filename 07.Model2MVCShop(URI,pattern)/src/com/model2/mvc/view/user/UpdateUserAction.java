@@ -34,6 +34,6 @@ public class UpdateUserAction extends Action {
 			session.setAttribute("user", user);
 		}
 		
-		return "redirect:/getUser.do?userId="+userId;
+		return "redirect:/user/getUser?userId="+userId;
 	}
 }
