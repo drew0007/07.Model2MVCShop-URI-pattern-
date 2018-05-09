@@ -140,6 +140,8 @@ function fncSort(currentPage, sort){
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">등록일</td>	
 		<td class="ct_line02"></td>
+		<td class="ct_list_b">평점</td>	
+		<td class="ct_line02"></td>
 		<td class="ct_list_b">현재상태</td>	
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">
@@ -149,7 +151,7 @@ function fncSort(currentPage, sort){
 		</td>	
 	</tr>
 	<tr>
-		<td colspan="15" bgcolor="808285" height="1"></td>
+		<td colspan="17" bgcolor="808285" height="1"></td>
 	</tr>
 	
 	<c:set var="i" value="0"/>
@@ -177,6 +179,8 @@ function fncSort(currentPage, sort){
 		<td></td>
 		<td align="center">${product.regDate}</td>
 		<td></td>
+		<td align="center">${product.scoreAvg}</td>
+		<td></td>
 		<td align="center">
 			${product.prodCnt != 0?"판매중":"재고없음" }
 		</td>	
@@ -188,7 +192,7 @@ function fncSort(currentPage, sort){
 		</td>
 	</tr>
 	<tr>
-		<td colspan="15" bgcolor="D6D7D6" height="1"></td>
+		<td colspan="17" bgcolor="D6D7D6" height="1"></td>
 	</tr>	
 	</c:forEach>
 </table>
@@ -197,7 +201,7 @@ function fncSort(currentPage, sort){
 	<tr>
 		<td align="center">
 			
-		<input type="hidden" id="currentPage" name="currentPage" value=""/>
+		<input type="hidden" id="currentPage" name="currentPage" value="0"/>
 			
 			<jsp:include page="../common/pageNavigator.jsp"/>
     	</td>

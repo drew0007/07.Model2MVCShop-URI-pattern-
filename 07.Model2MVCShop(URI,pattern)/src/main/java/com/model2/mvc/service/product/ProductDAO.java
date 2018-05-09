@@ -22,4 +22,7 @@ public interface ProductDAO {
 	
 	//list count
 	public int getTotalCount(Search search) throws Exception ;
+	
+	//상품 comment 조회
+	public Map<String, Object> getProductComment(int prodNo) throws Exception;
 }

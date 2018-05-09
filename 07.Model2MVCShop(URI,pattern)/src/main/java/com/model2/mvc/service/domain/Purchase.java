@@ -17,6 +17,11 @@ public class Purchase {
 	private String tranCode;
 	private int tranNo;
 	private int tranCnt;
+	private int score;
+	private String commentText;
+	private Date commentDate;
+	private String commentImage;
+
 	
 	public Purchase(){
 	}
@@ -96,6 +101,38 @@ public class Purchase {
 		this.tranCnt = tranCnt;
 	}
 	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public String getCommentText() {
+		return commentText;
+	}
+
+	public void setCommentText(String commentText) {
+		this.commentText = commentText;
+	}
+
+	public Date getCommentDate() {
+		return commentDate;
+	}
+
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
+	}
+
+	public String getCommentImage() {
+		return commentImage;
+	}
+
+	public void setCommentImage(String commentImage) {
+		this.commentImage = commentImage;
+	}
+
 	@Override
 	public String toString() {
 		return "Purchase [buyer=" + buyer + ", divyAddr=" + divyAddr
@@ -104,6 +141,8 @@ public class Purchase {
 				+ paymentOption + ", purchaseProd=" + purchaseProd
 				+ ", receiverName=" + receiverName + ", receiverPhone="
 				+ receiverPhone + ", tranCode=" + tranCode + ", tranNo="
-				+ tranNo + ", tranCnt=" + tranCnt +"]";
+				+ tranNo + ", tranCnt=" + tranCnt + ", score=" + score
+				+ ", commentText=" + commentText + ", commentDate=" + commentDate
+				+ ", commentImage=" + commentImage + "]";
 	}
 }

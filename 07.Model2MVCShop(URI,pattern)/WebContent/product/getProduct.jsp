@@ -98,7 +98,7 @@ function fncAddPurchase(){
 	</tr>
 	<tr>
 		<td width="104" class="ct_write">
-			상품이미지 <img 	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
+			상품이미지 <img 	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle" />
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
@@ -157,6 +157,14 @@ function fncAddPurchase(){
 		<td width="104" class="ct_write">등록일자</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">${product.regDate}</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
+	</tr>
+	<tr>
+		<td width="104" class="ct_write">평점</td>
+		<td bgcolor="D6D6D6" width="1"></td>
+		<td class="ct_write01">${product.scoreAvg}</td>
 	</tr>
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
@@ -231,6 +239,64 @@ function fncAddPurchase(){
 	</tr>
 </table>
 </form>
+
+<br/>
+
+<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
+	<tr>
+		<td width="15" height="37"><img src="/images/ct_ttl_img01.gif"	width="15" height="37"></td>
+		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left: 10px;">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="93%" class="ct_ttl01">상품평</td>
+					<td width="20%" align="right">&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+		<td width="12" height="37">
+			<img src="/images/ct_ttl_img03.gif"  width="12" height="37"/>
+		</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
+	</tr>
+	<c:forEach var="purchase" items="${list}">
+	<tr>
+		<td>${purchase.receiverName}</td>
+		<td>${purchase.commentDate}</td>
+	</tr>
+	<tr>
+		<td>
+		<c:forEach var="i" begin="1" end="5">
+			<c:if test="${i <= purchase.score}">
+				<img src="/images/uploadFiles/roundstar_01.png" width="15"/>
+			</c:if>
+			<c:if test="${i > purchase.score}">
+				<img src="/images/uploadFiles/roundstar_02.png" width="15"/>
+			</c:if>
+		</c:forEach>
+		</td>
+		<td colspan="2">${product.prodName} ${purchase.tranCnt} EA</td>
+	</tr>
+	<tr>
+		<td>
+			<c:if test="${!empty purchase.commentImage }">
+				<img src = "/images/uploadFiles/${purchase.commentImage}" width="100"/>
+			</c:if>
+		
+		</td>
+	</tr>
+	<tr>
+		<td>${purchase.commentText}</td>
+	</tr>
+	<tr>
+		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
+	</tr>	
+	</c:forEach>
+</table>
 
 </body>
 </html>

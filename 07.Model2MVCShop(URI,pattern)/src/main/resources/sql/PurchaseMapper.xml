@@ -18,6 +18,10 @@
 		<result property="orderDate" column="order_data" jdbcType="DATE"/>
 		<result property="divyDate" column="dlvy_date" jdbcType="DATE"/>
 		<result property="tranCnt" column="tran_cnt" jdbcType="INTEGER"/>
+		<result property="score" column="score" jdbcType="INTEGER"/>
+		<result property="commentText" column="comment_text" jdbcType="VARCHAR"/>
+		<result property="commentDate" column="comment_date" jdbcType="DATE"/>
+		<result property="commentImage" column="comment_image" jdbcType="VARCHAR"/>
 	
 		<association property="purchaseProd"  javaType="product">
 			<id property="prodNo" column="prod_no" jdbcType="INTEGER"/>
@@ -105,6 +109,18 @@
 			dlvy_date = #{divyDate:DATE}
 		</set>
 		WHERE tran_no = #{tranNo}
+	</update>
+	
+	<update id="updatePurchaseComment" parameterType="purchase">
+		UPDATE transaction
+		<set>
+			score = #{score:INTEGER},
+			comment_text = #{commentText:VARCHAR},
+			comment_date = SYSDATE,
+			comment_image = #{commentImage:VARCHAR}
+		</set>
+		WHERE tran_no = #{tranNo}
+		  AND prod_no = #{purchaseProd.prodNo}
 	</update>
 	
 	<sql id="select-purchase-list">

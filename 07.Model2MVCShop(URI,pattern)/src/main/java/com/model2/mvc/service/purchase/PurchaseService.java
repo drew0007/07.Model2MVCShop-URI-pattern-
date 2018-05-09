@@ -25,6 +25,9 @@ public interface PurchaseService {
 	//구매 정보 수정
 	public void updatePurchase(Purchase purchase) throws Exception;
 	
+	//구매후기
+	public void updatePurchaseComment(Purchase purchase) throws Exception;
+	
 	//배송 상태 변경
 	public void updateTranCode(Purchase purchase) throws Exception;
 	

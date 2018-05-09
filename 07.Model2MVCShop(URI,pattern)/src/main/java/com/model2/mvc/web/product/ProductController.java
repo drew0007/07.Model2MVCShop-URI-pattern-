@@ -56,8 +56,11 @@ public class ProductController {
 		String history = "";
 		if(cookie != null) {
 			for(int i=0; i<cookie.length; i++) {
+				System.out.println("length : "+cookie.length);
+				System.out.println("name : "+cookie[i].getName());
 				if(cookie[i].getName().equals("history")) {
 					history = cookie[i].getValue();
+					System.out.println("history0 : "+history);
 					String[] h = history.split(",");
 					for (int j = 0; j < h.length; j++) {
 						if (h[j].equals(prodNo)) {
@@ -74,13 +77,18 @@ public class ProductController {
 			history = prodNo;
 		}
 		
+		System.out.println("history1 : "+history);
+		
 		Cookie c = new Cookie("history", history);
 		c.setMaxAge(60*60);
 		response.addCookie(c);
 		
 		Product product = productService.getProduct(Integer.parseInt(prodNo));
 		
+		Map<String, Object> map = productService.getProductComment(Integer.parseInt(prodNo));
+		
 		model.addAttribute("product", product);
+		model.addAttribute("list", map.get("list"));
 		
 		return "forward:/product/getProduct.jsp";
 	}
@@ -125,5 +133,11 @@ public class ProductController {
 		model.addAttribute("menu", menu);
 		
 		return "redirect:/product/getProduct";
+	}
+	
+	@RequestMapping( value = "historyProduct")
+	public String historyProduct() throws Exception{
+		
+		return "forward:/history.jsp";
 	}
 }

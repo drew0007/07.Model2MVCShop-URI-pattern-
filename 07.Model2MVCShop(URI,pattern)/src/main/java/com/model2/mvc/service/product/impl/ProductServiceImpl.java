@@ -52,4 +52,8 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.updateProduct(product);
 	}
 
+	@Override
+	public Map<String, Object> getProductComment(int prodNo) throws Exception{
+		return productDAO.getProductComment(prodNo);
+	}
 }

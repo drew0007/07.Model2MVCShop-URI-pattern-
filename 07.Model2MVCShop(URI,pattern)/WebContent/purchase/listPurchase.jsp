@@ -109,6 +109,9 @@
 			<c:if test="${purchase.tranCode.equals('2') }">
 				<a href="/purchase/updateTranCode?tranNo=${purchase.tranNo}&tranCnt=${purchase.tranCnt}&tranCode=3&prodNo=${purchase.purchaseProd.prodNo}">물건도착</a>
 			</c:if>
+			<c:if test="${purchase.tranCode.equals('3') }">
+				<a href="/purchase/commentPurchase?tranNo=${purchase.tranNo}&prodNo=${purchase.purchaseProd.prodNo}">상품평 작성</a>
+			</c:if>
 		</td>
 	</tr>
 	<tr>
@@ -121,7 +124,7 @@
 	<tr>
 		<td align="center">
 		
-		<input type="hidden" id="currentPage" name="currentPage" value=""/>
+		<input type="hidden" id="currentPage" name="currentPage" value="0"/>
 		
 			<jsp:include page="../common/pageNavigator.jsp"/>
 		</td>

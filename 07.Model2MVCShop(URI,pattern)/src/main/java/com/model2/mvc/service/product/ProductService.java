@@ -20,5 +20,7 @@ public interface ProductService {
 
 	//상품 정보 수정
 	public void updateProduct(Product product) throws Exception;
-	
+
+	//상품 comment 조회
+	public Map<String, Object> getProductComment(int prodNo) throws Exception;
 }

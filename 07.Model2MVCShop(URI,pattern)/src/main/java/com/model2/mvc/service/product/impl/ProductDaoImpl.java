@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
+import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.product.ProductDAO;
 import com.model2.mvc.service.user.UserDao;
@@ -40,7 +41,8 @@ public class ProductDaoImpl implements ProductDAO{
 	@Override
 	public Product getProduct(int prodNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("ProductMapper.getProduct", prodNo);
+		Product product = sqlSession.selectOne("ProductMapper.getProduct", prodNo);
+		return product;
 	}
 
 	@Override
@@ -66,6 +68,17 @@ public class ProductDaoImpl implements ProductDAO{
 	@Override
 	public int getTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("ProductMapper.getProductListCount", search);
+	}
+	
+	@Override
+	public Map<String, Object> getProductComment(int prodNo) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<Purchase> list = sqlSession.selectList("ProductMapper.getProductComment", prodNo);
+		
+		map.put("list", list);
+		
+		return map;
 	}
 	
 }

@@ -1,5 +1,7 @@
-/com/
-/sql/
 /CartServiceTest.class
 /ProductServiceTest.class
 /PurchaseServiceTest.class
+/com/
+/config/
+/log4j.properties
+/sql/

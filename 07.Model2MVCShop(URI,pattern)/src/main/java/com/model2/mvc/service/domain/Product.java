@@ -12,8 +12,9 @@ public class Product {
 	private String prodName;		//	상품명
 	private int prodNo;				//	상품번호
 	private Date regDate;			//	등록일
-	private String prodTranCode;		//	상품상태
+	private String prodTranCode;	//	상품상태
 	private int prodCnt;			//	재고수량
+	private double scoreAvg;			//	평점
 	
 	public Product(){
 	}
@@ -75,11 +76,19 @@ public class Product {
 		this.prodCnt = prodCnt;
 	}
 
+	public double getScoreAvg() {
+		return scoreAvg;
+	}
+
+	public void setScoreAvg(double scoreAvg) {
+		this.scoreAvg = scoreAvg;
+	}
+
 	// Override
 	public String toString() {
 		return "Product : [fileName]" + fileName
 				+ "[manuDate]" + manuDate+ "[price]" + price + "[prodDetail]" + prodDetail
 				+ "[prodName]" + prodName + "[prodNo]" + prodNo + "[prodTranCode]" + prodTranCode
-				+ "[prodCnt]" + prodCnt + "[regDate]" + regDate;
+				+ "[prodCnt]" + prodCnt + "[regDate]" + regDate + "[scoreAvg]" + scoreAvg;
 	}
 }

@@ -107,6 +107,12 @@ public class PurchaseDaoImpl implements PurchaseDAO{
 	}
 
 	@Override
+	public void updatePurchaseComment(Purchase purchase) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("PurchaseMapper.updatePurchaseComment", purchase);
+	}
+
+	@Override
 	public void updateTranCode(Purchase purchase) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.update("PurchaseMapper.updateTranCode", purchase);

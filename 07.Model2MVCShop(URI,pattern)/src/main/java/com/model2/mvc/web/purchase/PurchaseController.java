@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -247,6 +248,39 @@ public class PurchaseController {
 			modelAndView.setViewName("/purchase/listPurchase");
 		}
 		
+		return modelAndView;
+	}
+	
+	@RequestMapping( value = "commentPurchase", method=RequestMethod.GET )
+	public ModelAndView commentPurchase(@RequestParam("tranNo") String tranNo,
+			   							@RequestParam("prodNo") String prodNo) throws Exception{
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("tranNo", tranNo);
+		modelAndView.addObject("prodNo", prodNo);
+		modelAndView.setViewName("/purchase/commentPurchase.jsp");
+
+		return modelAndView;
+	}
+	
+	@RequestMapping( value = "commentPurchase", method=RequestMethod.POST )
+	public ModelAndView commentPurchase(@ModelAttribute("purchase") Purchase purchase,
+										@RequestParam("prodNo") String prodNo) throws Exception{
+		
+		System.out.println("comment Ω√¿€");
+		
+		Product product = new Product();
+		product.setProdNo(Integer.parseInt(prodNo));
+		
+		purchase.setPurchaseProd(product);
+		
+		System.out.println("comment p : " + purchase);
+		
+		purchaseService.updatePurchaseComment(purchase);
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/listPurchase");
+
 		return modelAndView;
 	}
 }

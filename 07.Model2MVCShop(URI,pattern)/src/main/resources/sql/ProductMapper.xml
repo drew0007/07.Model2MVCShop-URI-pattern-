@@ -15,6 +15,17 @@
 		<result property="regDate" column="reg_date" jdbcType="DATE"/>
 		<result property="prodTranCode" column="tran_code" jdbcType="VARCHAR"/>
 		<result property="prodCnt" column="prod_cnt" jdbcType="INTEGER"/>
+		<result property="scoreAvg" column="score_avg" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<resultMap id="purchaseSelectMap" type="purchase">
+		<result property="receiverName" column="receiver_name" jdbcType="VARCHAR"/>
+		<result property="orderDate" column="order_data" jdbcType="DATE"/>
+		<result property="tranCnt" column="tran_cnt" jdbcType="INTEGER"/>
+		<result property="score" column="score" jdbcType="INTEGER"/>
+		<result property="commentText" column="comment_text" jdbcType="VARCHAR"/>
+		<result property="commentDate" column="comment_date" jdbcType="DATE"/>
+		<result property="commentImage" column="comment_image" jdbcType="VARCHAR"/>	
 	</resultMap>
 	
 	<insert id="addProduct" parameterType="product">
@@ -31,10 +42,19 @@
 	</insert>
 	
 	<select id="getProduct" parameterType="int" resultMap="productSelectMap">
-		SELECT 
-		p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, p.price, p.image_file, p.reg_date, p.prod_cnt 
-		FROM product p 
-		WHERE p.prod_no = #{value}
+		SELECT p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, p.price, p.image_file, p.reg_date, p.prod_cnt, AVG(t.score) AS score_avg
+		FROM product p, transaction t
+		WHERE p.prod_no = t.prod_no(+)
+		AND p.prod_no = #{value}
+		GROUP BY p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, p.price, p.image_file, p.reg_date, p.prod_cnt
+	</select>
+	
+	<select id="getProductComment" parameterType="int" resultMap="purchaseSelectMap">
+		SELECT receiver_name, order_data, tran_cnt, score, comment_text, comment_date, comment_image
+		FROM transaction
+		WHERE tran_status_code <![CDATA[ <> ]]> '5'
+		AND score <![CDATA[ > ]]> 0
+		AND prod_no = #{value}
 	</select>
 	
 	<update id="updateProduct" parameterType="product">
@@ -52,7 +72,7 @@
 	
 	
 	<sql id="select-product-list">
-		SELECT DISTINCT p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, p.price, p.image_file, p.reg_date, p.prod_cnt
+		SELECT p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, p.price, p.image_file, p.reg_date, p.prod_cnt, AVG(t.score) AS score_avg
 		  FROM product p, (SELECT * FROM transaction WHERE tran_status_code <![CDATA[ <> ]]> '5') t
 			<where>
 				p.prod_no = t.prod_no(+)
@@ -74,6 +94,7 @@
 					</when>
 				</choose>
 			</where>
+			GROUP BY p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, p.price, p.image_file, p.reg_date, p.prod_cnt
 			ORDER BY 
 			<if test="sort != null">
 				<choose>
